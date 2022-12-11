@@ -106,6 +106,7 @@ force_march = {
 									terrain = desert
 									terrain = marsh
 									terrain = jungle
+									terrain = desert_hills
 								}
 							}
 						}
