@@ -1,0 +1,437 @@
+﻿namespace = me_pontus_kingdom
+
+me_pontus_kingdom.1 = {
+    type = country_event
+
+    title = me_pontus_kingdom_1_title
+    desc = me_pontus_kingdom_1_desc
+    picture = crucifixion
+    left_portrait = char:52
+    right_portrait = char:37
+
+    immediate = {
+    	char:52 = {
+    		death = {
+    			killer = char:37
+    			death_reason = death_execution
+    		}
+    	}
+    }
+
+    option = {
+        name = "me_pontus_kingdom_1.a"
+        custom_tooltip = me_pontus_kingdom_1_tooltip
+        add_country_modifier = {
+        	name = kings_of_kios_mod
+        	duration = 730
+        }
+    }
+}
+me_pontus_kingdom.2 = {
+    type = country_event
+    goto_location = p:200
+    title = me_pontus_kingdom_2_title
+    desc = me_pontus_kingdom_2_desc
+    picture = city_siege
+    right_portrait = char:37
+    right_portrait = p:199.owner.current_ruler
+    left_portrait = current_ruler
+    left_portrait = char:52
+
+    immediate = {
+    	p:200.owner = { save_scope_as = kimiata_owner }
+    	every_owned_province = {
+    		add_to_list = prov_list
+    		ordered_pops_in_province = {
+    			limit = {
+    				prev = { total_population >= 3 }
+    				OR = {
+    					pop_culture = root.culture
+    					pop_religion = root.religion
+    				}
+    			}
+    			order_by = pop_hapiness
+    			max = 3
+    			check_range_bounds = no
+    			add_to_list = pop_list
+    		}
+    	}
+    	custom_tooltip = pontus_kimiata_move_effect_tt
+    	hidden_effect = {
+    		c:PRY = { release_subject = root }
+    		p:200 = {
+    			set_owned_by = root
+    		}
+    		every_in_list = {
+    			list = pop_list
+    			move_pop = p:200
+    		}
+    		if = {
+    			limit = {
+    				char:37 = { is_alive = yes }
+    			}
+    			every_in_list = {
+    				list = prov_list
+    				set_owned_by = c:PRY
+    			}
+    		}
+    		else_if = {
+    			limit = {
+    				exists = c:TRE
+    			}
+    			every_in_list = {
+    				list = prov_list
+    				set_owned_by = c:TRE
+    			}
+    		}
+    		else_if = {
+    			limit = {
+    				exists = c:MAC
+    			}
+    			every_in_list = {
+    				list = prov_list
+    				set_owned_by = c:MAC
+    			}
+    		}
+    	}
+    	if = {
+    		limit = {
+    			any_owned_province = {
+    				any_neighbor_province = {
+    					owner = scope:kimiata_owner
+    				}
+    			}
+    		}
+    		scope:kimiata_owner = {
+    			ordered_owned_province = {
+    				limit = {
+    					any_neighbor_province = {
+    						owner = root
+    					}
+    				}
+    				max = 1
+    				order_by = total_population
+    				save_scope_as = war_province
+    			}
+    		}
+    	}
+    	else = {
+    		scope:kimiata_owner.capital_scope = {
+    			save_scope_as = war_province
+    		}
+    	}
+    }
+    option = {
+    	# Kill em all
+        name = "me_pontus_kingdom_2.a"
+        custom_tooltip = me_pontus_kingdom_2_tooltip
+        declare_war_with_wargoal = {
+			war_goal = conquer_wargoal
+			province = scope:war_province
+			target = scope:kimiata_owner
+		}
+		create_unit = {
+			location = p:200
+			hidden_effect = {
+				add_subunit = heavy_infantry
+				add_subunit = light_infantry
+				add_subunit = light_infantry
+				add_subunit = light_infantry
+				add_subunit = light_infantry
+				add_subunit = light_cavalry
+				add_subunit = light_cavalry
+			}
+		}
+    }
+    option = {
+    	# Nah, they cool
+        name = "me_pontus_kingdom_2.b"
+        custom_tooltip = me_pontus_kingdom_2_tooltipp
+        scope:kimiata_owner = {
+            trigger_event = me_pontus_kingdom.222
+        }
+    }
+}
+
+
+me_pontus_kingdom.222 = {
+    type = country_event
+    title = me_pontus_kingdom.222.t
+    desc = me_pontus_kingdom.222.desc
+    picture = great_library
+    
+    left_portrait = current_ruler
+    right_portrait = scope:mission_country.current_ruler
+
+    immediate = {
+        set_variable = {
+            name = roll
+            value = {
+                integer_range = {
+                    min = 0
+                    max = 5
+                }
+            }
+            days = 180
+        }
+    }
+
+    option = {
+        # Time to kill these fools
+        name = me_pontus_kingdom.222.a
+        declare_war_with_wargoal = {
+            war_goal = conquer_wargoal
+            province = p:200
+            target = scope:mission_country
+        }
+        ai_chance = {
+            base = 5
+            modifier = {
+                factor = -50
+                var:roll <= 1
+            }
+            modifier = {
+                factor = 50
+                var:roll >= 2
+            }
+        }
+    }
+    option = {
+        # We will leave them be...for now
+        name = me_pontus_kingdom.222.b
+        current_ruler = {
+            add_popularity = -10
+        }
+        ai_chance = {
+            base = 0
+            modifier = {
+                factor = 25
+                var:roll <= 1
+            }
+            modifier = {
+                factor = -25
+                var:roll >= 2
+            }
+        }
+    }
+}
+
+
+me_pontus_kingdom.3 = {
+    type = country_event
+
+    title = me_pontus_kingdom_3_title
+    desc = me_pontus_kingdom_3_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_3.a"
+        custom_tooltip = me_pontus_kingdom_3_tooltip
+        add_country_modifier = {
+            name = fight_for_a_new_kingdom_mod
+            duration = 730
+        }
+    }
+}
+me_pontus_kingdom.4 = {
+    type = country_event
+
+    title = me_pontus_kingdom_4_title
+    desc = me_pontus_kingdom_4_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_4.a"
+        custom_tooltip = me_pontus_kingdom_4_tooltip
+        current_ruler = {
+            add_popularity = 25
+            add_martial = 1
+        }
+        add_treasury = 50
+    }
+}
+me_pontus_kingdom.5 = {
+    type = country_event
+
+    title = me_pontus_kingdom_5_title
+    desc = me_pontus_kingdom_5_desc
+    picture = great_library
+
+    immediate = {
+        set_variable = free_religion_conversion
+    }
+
+    option = {
+        name = "me_pontus_kingdom_5.a"
+        custom_tooltip = me_pontus_kingdom_5_tooltip
+        change_religion_effect = { RELIGION = mithra_religion }
+        add_political_influence = -100
+        add_stability = -15
+    }
+    option = {
+        name = "me_pontus_kingdom_5.b"
+        custom_tooltip = me_pontus_kingdom_5_tooltip
+        change_religion_effect = { RELIGION = roman_pantheon }
+        add_political_influence = -100
+        add_stability = -15
+    }
+    option = {
+        name = "me_pontus_kingdom_5.c"
+        add_stability = 5
+    }
+    after = {
+        remove_variable = free_religion_conversion
+    }
+}
+me_pontus_kingdom.6 = {
+    type = country_event
+
+    title = me_pontus_kingdom_6_title
+    desc = me_pontus_kingdom_6_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_6.a"
+        custom_tooltip = me_pontus_kingdom_6_tooltip
+        add_treasury = -25
+        add_political_influence = -15
+        area:paphlagonia_inferior_area = { mission_area_claim_effect = yes }
+        area:paphlagonia_superior_area = { mission_area_claim_effect = yes }
+    }
+}
+me_pontus_kingdom.7 = {
+    type = country_event
+
+    title = me_pontus_kingdom_7_title
+    desc = me_pontus_kingdom_7_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_7.a"
+        custom_tooltip = me_pontus_kingdom_7_tooltip
+        capital_scope = {
+            add_province_modifier = {
+                name = pontus_capital_modifier
+                duration = -1
+                mode = add
+            }
+        }
+    }
+}
+me_pontus_kingdom.8 = {
+    type = country_event
+
+    title = me_pontus_kingdom_8_title
+    desc = me_pontus_kingdom_8_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_8.a"
+        custom_tooltip = me_pontus_kingdom_8_tooltip
+
+    }
+}
+me_pontus_kingdom.9 = {
+    type = country_event
+
+    title = me_pontus_kingdom_9_title
+    desc = me_pontus_kingdom_9_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_9.a"
+        custom_tooltip = me_pontus_kingdom_9_tooltip
+
+    }
+}
+me_pontus_kingdom.10 = {
+    type = country_event
+
+    title = me_pontus_kingdom_10_title
+    desc = me_pontus_kingdom_10_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_10.a"
+        custom_tooltip = me_pontus_kingdom_10_tooltip
+
+    }
+}
+me_pontus_kingdom.11 = {
+    type = country_event
+
+    title = me_pontus_kingdom_11_title
+    desc = me_pontus_kingdom_11_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_11.a"
+        custom_tooltip = me_pontus_kingdom_11_tooltip
+
+    }
+}
+me_pontus_kingdom.12 = {
+    type = country_event
+
+    title = me_pontus_kingdom_12_title
+    desc = me_pontus_kingdom_12_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_12.a"
+        custom_tooltip = me_pontus_kingdom_12_tooltip
+
+    }
+}
+me_pontus_kingdom.13 = {
+    type = country_event
+
+    title = me_pontus_kingdom_13_title
+    desc = me_pontus_kingdom_13_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_13.a"
+        custom_tooltip = me_pontus_kingdom_13_tooltip
+
+    }
+}
+me_pontus_kingdom.14 = {
+    type = country_event
+
+    title = me_pontus_kingdom_14_title
+    desc = me_pontus_kingdom_14_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_14.a"
+        custom_tooltip = me_pontus_kingdom_14_tooltip
+
+    }
+}
+me_pontus_kingdom.15 = {
+    type = country_event
+
+    title = me_pontus_kingdom_15_title
+    desc = me_pontus_kingdom_15_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_15.a"
+        custom_tooltip = me_pontus_kingdom_15_tooltip
+
+    }
+}
+me_pontus_kingdom.16 = {
+    type = country_event
+
+    title = me_pontus_kingdom_16_title
+    desc = me_pontus_kingdom_16_desc
+    picture = great_library
+
+    option = {
+        name = "me_pontus_kingdom_16.a"
+        custom_tooltip = me_pontus_kingdom_16_tooltip
+
+    }
+}
