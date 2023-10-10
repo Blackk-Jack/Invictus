@@ -624,5 +624,192 @@
 			base = 1
 		}
 	}
+
+	### Libu Decisions ###
+	integrate_cyrenaican_navy = {
+		potential = {
+			primary_culture = libyan
+			war = no
+			NOT = {
+				has_variable = cyr_integrates_navy
+			}
+		}
+		allow = {
+			treasury >= 150
+		}
+		effect = {
+			set_variable = cyr_integrates_navy
+	    	create_unit = {
+	            sub_unit = liburnian
+				location = 2574
+				navy = yes
+				add_subunit = liburnian
+				add_subunit = liburnian
+				add_subunit = liburnian
+				add_subunit = liburnian
+				add_subunit = trireme
+				add_subunit = trireme
+				add_subunit = trireme
+				add_subunit = tetrere
+			}
+			add_treasury = -150
+		}
+	}
+	tifinagh_script_kings_list = {
+		potential = {
+			has_country_modifier = tifinagh_script
+			government = aristocratic_monarchy
+		}
+		allow = {
+			legitimacy >= 80
+			treasury >= 50
+			current_ruler = {
+				popularity >= 70
+			}
+		}
+		effect = {
+			create_country_treasure = {
+				key = "tifinagh_libu_kings_list"
+				icon = "old_script_1"
+				modifier = {
+					local_research_points_modifier = 0.1
+					local_pop_conversion_speed = 0.1
+				}
+			}
+		}
+	}
+	greek_script_kings_list = {
+		potential = {
+			has_country_modifier = greek_script
+			government = aristocratic_monarchy
+		}
+		allow = {
+			legitimacy >= 80
+			treasury >= 50
+			current_ruler = {
+				popularity >= 70
+			}
+		}
+		effect = {
+			create_country_treasure = {
+				key = "greek_libu_kings_list"
+				icon = "old_script_2"
+				modifier = {
+					local_population_happiness = 0.1
+					local_pop_assimilation_speed = 0.1
+				}
+			}
+		}
+	}
+	hippodrome_of_barce = {
+		potential = {
+			num_of_cities >= 1
+			owns = 3357
+			p:3357 = {
+				NOT = { has_variable = built_hippodrome }
+			}
+			NOR = {
+				has_variable = hippodrome_barce_progress
+				has_variable = hippodrome_barce_quality
+			}
+			has_variable = cyr_libya_hippodrome
+		}
+		highlight = {
+			scope:province = {
+				province_id = 3357
+			}
+		}
+		allow = {
+			trigger_if = {
+				limit = {
+					is_ai = yes
+				}
+				treasury >= 1
+			}
+			trigger_else = {
+				treasury >= 500
+			}
+			trigger_if = {
+				limit = { is_ai = no }
+				stability > 40
+			}
+			p:3357 = {
+				free_building_slots >= 1
+				great_work_locator_is_free = yes
+			}
+		}
+		effect = {
+			if = {	
+				limit = {
+					is_ai = no
+				}
+				add_treasury = -500
+			}
+			else = {
+				add_treasury = -1
+			}
+			custom_tooltip = "dhe_hippodrome_barce_tooltip"
+			hidden_effect = {
+				set_variable = {
+					name = hippodrome_barce_progress
+					value = 1
+				}
+				set_variable = {
+					name = hippodrome_barce_quality
+					value = 1
+				}
+				trigger_event = {
+					id = "dhe_hippodrome_barce.10" # hippodrome event initial
+				}
+				trigger_event = {
+					id = "dhe_hippodrome_barce.1" # hippodrome event 1
+					days = { 150 300 }
+				}
+				p:3357 = {
+					begin_great_work_construction = {
+						great_work = "hippodrome_of_barce_work"
+						locator = great_work	
+						is_ancient = yes				
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1000
+		}
+	}
+	camel_breeding_libu = {
+		potential = {
+			has_variable = libu_camel_program
+			NOT = { has_variable = did_program_libu }
+		}
+		highlight = {
+            scope:province = { 
+            	any_owned_province = {
+                	trade_goods = horses
+            	}
+            }
+		}
+		allow = {
+			treasury >= 100
+			any_owned_province = {
+				trade_goods = horses
+			}
+		}
+		effect = {
+			random_owned_province = {
+				limit = {
+					trade_goods = horses
+				}
+				set_trade_goods = camel
+				add_province_modifier = {
+					name = camel_farms
+					duration = -1
+				}
+			}
+			add_treasury = -100
+			set_variable = did_program_libu
+		}
+	}
 }
 

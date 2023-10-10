@@ -1,0 +1,1841 @@
+﻿namespace = me_cyr_libya
+namespace = dhe_hippodrome_barce
+
+me_cyr_libya.1 = { # The Spoils of Victory
+    type = country_event
+
+    title = me_cyr_libya_1_title
+    desc = me_cyr_libya_1_desc
+    picture = catafalc_damaged
+
+    option = {
+        name = "me_cyr_libya_1.a"
+        custom_tooltip = me_cyr_libya_1_tooltip
+        add_treasury = 250
+        add_political_influence = 50
+        add_country_modifier = {
+            name = spoils_of_war
+            duration = 365
+        }
+        p:3360 = {
+            add_province_modifier = {
+                name = we_be_losers
+                duration = 365
+            }
+        }
+        add_stability = 30
+    }
+}
+me_cyr_libya.2 = { # Foreign Customs
+    type = country_event
+
+    title = me_cyr_libya_2_title
+    desc = me_cyr_libya_2_desc
+    picture = successors
+
+    option = {
+        name = "me_cyr_libya_2.a"
+        custom_tooltip = me_cyr_libya_2_tooltip
+        change_law = coin_minting_law
+        change_law = increased_council_powers
+    }
+}
+me_cyr_libya.3 = { # Return to Old Ways
+    type = country_event
+
+    title = me_cyr_libya_3_title
+    desc = me_cyr_libya_3_desc
+    picture = revolt
+
+    option = {
+        name = "me_cyr_libya_3.a"
+        custom_tooltip = me_cyr_libya_3_tooltip
+        change_law = follow_the_strong_law
+        change_law = tribal_decentralized_laws_2
+        change_law = super_decentralized_law_two
+    }
+}
+me_cyr_libya.4 = { # The Capital at Barke
+    type = country_event
+
+    title = me_cyr_libya_4_title
+    desc = me_cyr_libya_4_desc
+    picture = persepolis
+
+    option = {
+        name = "me_cyr_libya_4.a"
+        custom_tooltip = me_cyr_libya_4_tooltip
+        p:3357 = {
+            add_province_modifier = {
+                name = capital_of_libu
+                duration = -1
+            }
+        }
+        add_2_free_province_investments = yes
+        while = {
+            count = 10
+            every_owned_province = {
+                limit = {
+                    province_id = 3357
+                }
+                random_pops_in_province = {
+                    limit = {
+                        NOT = {pop_culture = root.culture}
+                    }
+                    set_pop_culture = root.culture
+                }
+            }
+        }
+    }
+}
+me_cyr_libya.5 = { # Recruit Hellenic Advisors
+    type = country_event
+
+    title = me_cyr_libya_5_title
+    desc = me_cyr_libya_5_desc
+    picture = interesting_histories_greek_city_man
+
+    option = {
+        name = "me_cyr_libya_5.a"
+        custom_tooltip = me_cyr_libya_5_tooltip
+        add_country_modifier = {
+            name = hellenic_advisors
+            duration = 1825
+        }
+        add_innovation = 1
+    }
+}
+
+me_cyr_libya.600 = { # Seek Common Ground: Where to Start?
+    type = country_event
+
+    title = me_cyr_libya_6_title
+    desc = me_cyr_libya_600_desc
+    picture = greek_home
+
+    option = {
+        name = "me_cyr_libya_600.a"
+        trigger_event = {
+            id = me_cyr_libya.601 # Culture
+            days = { 20 30 }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_600.b"
+        trigger_event = {
+            id = me_cyr_libya.602 # Religion
+            days = { 20 30 }
+        }
+    }
+}
+me_cyr_libya.601 = { # Seek Common Ground: Quadriga
+    type = country_event
+
+    title = me_cyr_libya_601_title
+    desc = me_cyr_libya_601_desc
+    picture = interesting_histories_celt_chariot
+
+    option = {
+        name = "me_cyr_libya_601.a"
+        if = {
+            limit = {
+                has_variable = already_done_religion
+            }
+            trigger_event = {
+                id = me_cyr_libya.603 # End
+                days = { 20 30 }
+            }
+        }
+        if = {
+            limit = {
+                NOT = { has_variable = already_done_religion }
+            }
+            trigger_event = {
+                id = me_cyr_libya.602 # Religion
+                days = { 20 30 }
+            }
+        }
+        add_treasury = -75
+        set_variable = already_done_culture
+    }
+}
+me_cyr_libya.602 = { # Seek Common Ground: Barce
+    type = country_event
+
+    title = me_cyr_libya_602_title
+    desc = me_cyr_libya_602_desc
+    picture = interesting_histories_greek_city_temple
+
+    option = {
+        name = "me_cyr_libya_602.a"
+        if = {
+            limit = {
+                has_variable = already_done_culture
+            }
+            trigger_event = {
+                id = me_cyr_libya.603 # End
+                days = { 20 30 }
+            }
+        }
+        if = {
+            limit = {
+                NOT = { has_variable = already_done_culture }
+            }
+            trigger_event = {
+                id = me_cyr_libya.601 # Culture
+                days = { 20 30 }
+            }
+        }
+        add_political_influence = -25
+        set_variable = already_done_religion
+        set_variable = deity_barce_unlocked
+    }
+}
+me_cyr_libya.603 = { # Seek Common Ground: End
+    type = country_event
+
+    title = me_cyr_libya_603_title
+    desc = me_cyr_libya_603_desc
+    picture = greek_marketplace
+
+    option = {
+        name = "me_cyr_libya_603.a"
+    }
+}
+me_cyr_libya.6 = { # Seek Common Ground: Final
+    type = country_event
+
+    title = me_cyr_libya_6_title
+    desc = me_cyr_libya_6_desc
+    picture = diadochi_greek_royal_wedding
+
+    option = {
+        name = "me_cyr_libya_6.a"
+        custom_tooltip = me_cyr_libya_6_tooltip
+        add_country_modifier = {
+            name = libu_hippodrome
+            duration = 365
+        }
+        set_variable = cyr_libya_hippodrome
+    }
+}
+me_cyr_libya.7 = { # Hellenic Reconciliation
+    type = country_event
+
+    title = me_cyr_libya_7_title
+    desc = me_cyr_libya_7_desc
+    picture = interesting_histories_greek_debate
+
+    option = {
+        name = "me_cyr_libya_7.a"
+        custom_tooltip = me_cyr_libya_7_tooltip
+        add_4_free_province_investments = yes
+        add_innovation = 2
+        random_owned_province = {
+            limit = {
+                has_city_status = yes
+                province_dominant_culture_group = hellenic
+                is_in_area = cyrenaica_inferioris_area
+                NOT = { province_id = 3357 }
+            }
+            add_province_modifier = {
+                name = greek_reconciliation
+                duration = -1
+            }
+        }
+        random_owned_province = {
+            limit = {
+                has_city_status = yes
+                province_dominant_culture_group = hellenic
+                is_in_area = cyrenaica_superioris_area
+            }
+            add_province_modifier = {
+                name = greek_reconciliation
+                duration = -1
+            }
+        }
+    }
+}
+### Letters for the Libyan Tongue Event Chain ###
+me_cyr_libya.8 = { # Letters for the Libyan Tongue: Intro
+    type = country_event
+
+    title = me_cyr_libya_8_title
+    desc = me_cyr_libya_8_desc
+    picture = scribe_tools
+
+    option = {
+        name = "me_cyr_libya_8.a"
+        trigger_event = {
+            id = me_cyr_libya.800  # Libyan Path
+            days = { 50 70 }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_8.b"
+        trigger_event = {
+            id = me_cyr_libya.804  # Greek Path
+            days = { 50 70 }
+        }
+    }
+}
+me_cyr_libya.800 = { # Letters for the Libyan Tongue: Tifinagh Options
+    type = country_event
+
+    title = me_cyr_libya_800_title
+    desc = me_cyr_libya_800_desc
+    picture = celtic_chiefs
+
+    immediate = {
+        hidden_effect = {
+            create_character = {
+                age = 27
+                culture = massylian
+                religion = berber_religion
+                no_stats = yes
+                hidden_effect = {
+                    bad_martial_effect = yes
+                    good_finesse_effect = yes
+                    good_charisma_effect = yes
+                    great_zeal_effect = yes
+                }
+                save_scope_as = numidian_tifinagh_writer
+            }
+        }
+    }
+
+    option = {
+        name = "me_cyr_libya_800.a" # Recruit
+        add_treasury = -50
+        trigger_event = {
+            id = me_cyr_libya.801
+            days = { 50 70 }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_800.b" # Befriend
+        add_political_influence = -50
+        trigger_event = {
+            id = me_cyr_libya.802
+            days = { 50 70 }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_800.c" # Capture
+        add_manpower = -1
+        trigger_event = {
+            id = me_cyr_libya.803
+            days = { 50 70 }
+        }
+    }
+}
+me_cyr_libya.801 = { # Letters for the Libyan Tongue: Recruit
+    type = country_event
+
+    title = me_cyr_libya_801_title
+    desc = me_cyr_libya_801_desc
+    picture = great_work_architect
+    left_portrait = current_ruler
+    right_portrait = scope:numidian_tifinagh_writer
+
+    immediate = {
+        random_character = {
+            limit = { has_high_priest_office_trigger = yes }
+            remove_all_positions = yes
+        }
+    }
+
+    option = {
+        name = "me_cyr_libya_801.a"
+        custom_tooltip = me_cyr_libya_8_tooltip
+        add_country_modifier = {
+            name = tifinagh_script
+            duration = -1
+        }
+        add_country_modifier = {
+            name = implementing_new_script
+            duration = 365
+        }
+        scope:numidian_tifinagh_writer = { give_office = office_high_priest }
+    }
+}
+me_cyr_libya.802 = { # Letters for the Libyan Tongue: Befriend
+    type = country_event
+
+    title = me_cyr_libya_802_title
+    desc = me_cyr_libya_802_desc
+    picture = council_country
+    left_portrait = current_ruler
+    right_portrait = scope:numidian_tifinagh_writer
+
+    option = {
+        name = "me_cyr_libya_802.a"
+        custom_tooltip = me_cyr_libya_8_tooltip
+        add_country_modifier = {
+            name = tifinagh_script
+            duration = -1
+        }
+        add_country_modifier = {
+            name = implementing_new_script
+            duration = 365
+        }
+        hidden_effect = { set_as_minor_character = scope:numidian_tifinagh_writer }
+        current_ruler = { add_friend = scope:numidian_tifinagh_writer }
+    }
+}
+me_cyr_libya.803 = { # Letters for the Libyan Tongue: Capture
+    type = country_event
+
+    title = me_cyr_libya_803_title
+    desc = me_cyr_libya_803_desc
+    picture = hellenistic_army
+    left_portrait = current_ruler
+    right_portrait = scope:numidian_tifinagh_writer
+
+    option = {
+        name = "me_cyr_libya_803.a"
+        custom_tooltip = me_cyr_libya_8_tooltip
+        add_country_modifier = {
+            name = tifinagh_script
+            duration = -1
+        }
+        add_country_modifier = {
+            name = implementing_new_script
+            duration = 365
+        }
+        hidden_effect = { set_as_minor_character = scope:numidian_tifinagh_writer }
+        imprison = { target = scope:numidian_tifinagh_writer }
+    }
+}
+me_cyr_libya.804 = { # Letters for the Libyan Tongue: Greco-Libyan Alphabet
+    type = country_event
+
+    title = me_cyr_libya_804_title
+    desc = me_cyr_libya_804_desc
+    picture = greek_philosophers
+
+    immediate = {
+        create_character = {
+            age = 35
+            culture = cyrenaican
+            religion = roman_pantheon
+            no_stats = yes
+            hidden_effect = {
+                bad_martial_effect = yes
+                great_finesse_effect = yes
+                great_charisma_effect = yes
+                average_zeal_effect = yes
+            }
+            save_scope_as = greco_libyan_script_creator
+        }
+    }
+
+    option = {
+        name = "me_cyr_libya_804.a"
+        add_treasury = -25
+        add_political_influence = -25
+        trigger_event = {
+            id = me_cyr_libya.805
+            days = { 50 70 }
+        }
+    }
+}
+me_cyr_libya.805 = { # Letters for the Libyan Tongue: The Libu Script
+    type = country_event
+
+    title = me_cyr_libya_805_title
+    desc = me_cyr_libya_805_desc
+    picture = greek_theater
+    left_portrait = current_ruler
+    right_portrait = scope:greco_libtan_script_creator
+
+    option = {
+        name = "me_cyr_libya_805.a"
+        add_country_modifier = {
+            name = greek_script
+            duration = -1
+        }
+        hidden_effect = { set_as_minor_character = scope:greco_libyan_script_creator }
+        current_ruler = { add_friend = scope:greco_libyan_script_creator }
+    }
+}
+me_cyr_libya.806 = { # Letters for the Libyan Tongue: Final
+    type = country_event
+
+    title = me_cyr_libya_806_title
+    desc = me_cyr_libya_806_desc
+    picture = scribe_tools
+
+    option = {
+        name = "me_cyr_libya_806.a"
+        add_centralization = 25
+        custom_tooltip = me_cyr_libya_8_tooltip
+    }
+}
+### Event Chain End ###
+
+me_cyr_libya.9 = { # Kings of Eastern Libya
+    type = country_event
+
+    title = me_cyr_libya_9_title
+    desc = me_cyr_libya_9_desc
+    picture = throneroom
+
+    option = {
+        name = "me_cyr_libya_9.a"
+        custom_tooltip = me_cyr_libya_9_tooltip
+        change_government = aristocratic_monarchy
+        add_country_modifier = {
+            name = king_of_libu
+            duration = -1
+        }
+        #set_variable = eastern_kings_libya
+        hidden_effect = {
+                region:cyrenaica_region = {
+                every_region_province = {
+                    add_claim = root
+                }
+            }
+        }
+        custom_tooltip = "add_claims_east_libya"
+    }
+}
+
+me_cyr_libya.10 = { # Plunder the Greek Cities
+    type = country_event
+
+    title = me_cyr_libya_10_title
+    desc = me_cyr_libya_10_desc
+    picture = interesting_histories_italic_hilltop
+
+    option = {
+        name = "me_cyr_libya_10.a"
+        custom_tooltip = me_cyr_libya_10_tooltip
+        custom_tooltip = slave_raiding_enabled_tt
+        set_variable = unlocked_slave_raiding
+        add_treasury = 500
+        add_political_influence = 200
+        add_legitimacy = legitimacy_huge
+        current_ruler = {
+            add_popularity = 20
+            add_trait = cruel
+            add_martial = 2
+            add_zeal = 2
+            add_nickname = "the_terrible_libu"
+        }
+        create_unit = {
+            location = 2574
+            navy = yes
+            add_subunit = octere
+            add_subunit = hexere
+        }
+        custom_tooltip = "occupation_kill_tt"
+        every_province = {
+            limit = {
+                controller = root
+                NOT = { owner = root }
+                has_city_status = yes
+            }
+            while = {
+                count = 10
+                random_pops_in_province = {
+                    kill_pop = yes
+                }
+            }
+            destroy_building_effect = yes
+        }
+    }
+}
+me_cyr_libya.11 = { # Entice Libyan Settlers
+    type = country_event
+
+    title = me_cyr_libya_11_title
+    desc = me_cyr_libya_11_desc
+    picture = interesting_histories_punic_town
+
+    option = {
+        name = "me_cyr_libya_11.a"
+        custom_tooltip = me_cyr_libya_11_tooltip
+        custom_tooltip = 10_pops_culture_convert_tt
+        hidden_effect = {
+            every_province = {
+                limit = {
+                    dominant_province_culture = cyrenaican
+                    has_city_status = yes
+                }
+                while = {
+                    count = 10
+                    limit = {
+                        any_pops_in_province = {
+                            pop_culture = cyrenaican
+                        }
+                    }
+                    random_pops_in_province = {
+                        limit = {
+                            NOT = { pop_culture = libyan }
+                        }
+                        set_pop_culture = libyan
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Garamantes Meeting Event Chain
+me_cyr_libya.12 = { # Approach for Garamantes
+    type = country_event
+
+    title = me_cyr_libya_12_title
+    desc = me_cyr_libya_12_desc
+    picture = army_desert
+    left_portrait = current_ruler
+    right_portrait = c:GAR.current_ruler
+
+    option = {
+        name = "me_cyr_libya_12.a"
+        #Initial Request 1: Neutral
+        random_list = {
+            95 = {
+                trigger_event = me_cyr_libya.121 # Success
+                custom_tooltip = success_chance_tt
+            }
+            5 = {
+                trigger_event = me_cyr_libya.122 # Golden Success
+                custom_tooltip = success_golden_tt
+            }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_12.b"
+        add_treasury = -50
+        current_ruler = {
+            add_gold = -100
+        }
+        reverse_add_opinion = {
+            target = c:GAR
+            modifier = opinion_gift
+        }
+        #Initial Request 2: Good
+        random_list = {
+            8 = {
+                trigger_event = me_cyr_libya.121 # Success
+                custom_tooltip = success_chance_tt
+            }
+            2 = {
+                trigger_event = me_cyr_libya.122 # Golden Success
+                custom_tooltip = success_golden_tt
+            }
+        }
+    }
+    option = {
+        name = "me_cyr_libya_12.c"
+        add_tyranny = 5
+        add_aggressive_expansion = 5
+        reverse_add_opinion = {
+            target = c:GAR
+            modifier = opinion_insult
+        }
+        random_list = {
+            45 = {
+                trigger_event = me_cyr_libya.123 # Failure
+                custom_tooltip = failure_chance_tt
+            }
+            40 = {
+                trigger_event = me_cyr_libya.124 # Critical Failure
+                custom_tooltip = failure_critical_tt
+            }
+            15 = {
+                trigger_event = me_cyr_libya.122 # Golden Success
+                custom_tooltip = success_golden_tt
+            }
+        }
+    }
+}
+me_cyr_libya.121 = { # Success
+    type = country_event
+
+    title = me_cyr_libya_121_title
+    desc = me_cyr_libya_121_desc
+    picture = trial_govtype
+    left_portrait = current_ruler
+    right_portrait = c:GAR.current_ruler
+
+    option = {
+        name = "me_cyr_libya_121.a"
+        c:GAR = {
+            add_alliance = root
+        }
+        custom_tooltip = me_cyr_libya_12_tooltip
+    }
+    option = {
+        name = "me_cyr_libya_121.b"
+        random_list = {
+            10 = {
+                trigger_event = me_cyr_libya.122 # Golden Success
+                custom_tooltip = success_golden_tt
+            }
+            10 = {
+                trigger_event = me_cyr_libya.123 # Failure
+                custom_tooltip = failure_chance_tt
+            }
+            10 = {
+                trigger_event = me_cyr_libya.124 # Critical Failure
+                custom_tooltip = failure_critical_tt
+            }
+        }
+    }
+}
+me_cyr_libya.122 = { # Golden Success
+    type = country_event
+
+    title = me_cyr_libya_122_title
+    desc = me_cyr_libya_122_desc
+    picture = celtic_diplomacy
+    left_portrait = current_ruler
+    right_portrait = c:GAR.current_ruler
+
+    option = {
+        name = "me_cyr_libya_122.a"
+        make_subject = {
+            target = c:GAR
+            type = client_state
+        }
+        custom_tooltip = me_cyr_libya_12_tooltip
+    }
+}
+me_cyr_libya.123 = { # Failure
+    type = country_event
+
+    title = me_cyr_libya_123_title
+    desc = me_cyr_libya_123_desc
+    picture = roman_trial
+    left_portrait = current_ruler
+    right_portrait = c:GAR.current_ruler
+
+    option = {
+        name = "me_cyr_libya_123.a"
+        custom_tooltip = me_cyr_libya_12_tooltip
+    }
+}
+me_cyr_libya.124 = { # Critical Failure
+    type = country_event
+
+    title = me_cyr_libya_124_title
+    desc = me_cyr_libya_124_desc
+    picture = dagger_behind_back
+    left_portrait = current_ruler
+    right_portrait = c:GAR.current_ruler
+
+    option = {
+        name = "me_cyr_libya_124.a"
+        c:GAR = {
+            declare_war_with_wargoal = {
+                war_goal = conquer_wargoal
+                target = ROOT
+                province = ROOT.capital_scope
+            }
+        }
+        custom_tooltip = me_cyr_libya_12_tooltip
+    }
+}
+
+me_cyr_libya.13 = { # Camel War Parties
+    type = country_event
+
+    title = me_cyr_libya_13_title
+    desc = me_cyr_libya_13_desc
+    picture = interesting_histories_kush_capital
+
+    option = {
+        name = "me_cyr_libya_13.a"
+        custom_tooltip = me_cyr_libya_13_tooltip
+        custom_tooltip = camel_breeding_program_tt
+        add_country_modifier = {
+            name = war_camels
+            duration = -1
+        }
+        set_variable = libu_camel_program
+    }
+}
+me_cyr_libya.14 = { # Raid the Cities of the West
+    type = country_event
+
+    title = me_cyr_libya_14_title
+    desc = me_cyr_libya_14_desc
+    picture = interesting_histories_punic_town
+
+    option = {
+        name = "me_cyr_libya_14.a"
+        custom_tooltip = me_cyr_libya_14_tooltip
+        add_country_modifier = {
+            name = raided_punic_city
+            duration = 1825
+        }
+        add_treasury = 200
+        add_political_influence = 50
+        add_innovation = 2
+        custom_tooltip = punic_death_tt
+        hidden_effect = {
+            every_province = {
+                limit = {
+                    controller = root
+                    NOT = { owner = root }
+                }
+                while = {
+                    count = 3
+                    random_pops_in_province = {
+                        kill_pop = yes
+                    }
+                }
+                destroy_building_effect = yes
+            }
+        }
+    }
+}
+me_cyr_libya.15 = { # Terror from the Desert
+    type = country_event
+
+    title = me_cyr_libya_15_title
+    desc = me_cyr_libya_15_desc
+    picture = looting_dishonor
+
+    option = {
+        name = "me_cyr_libya_15.a"
+        custom_tooltip = me_cyr_libya_15_tooltip
+        change_government = steppe_horde
+        add_country_modifier = {
+            name = desert_horde
+            duration = -1
+        }
+        add_country_modifier = {
+            name = terror_from_the_desert
+            duration = -1
+        }
+        every_country = {
+            limit = {
+                in_diplomatic_range = ROOT
+                is_tribal = no
+                NOT = { alliance_with = root }
+            }
+            add_opinion = {
+                modifier = fear_of_sand
+                target = ROOT
+            }
+        }
+    }
+}
+# Decision Events
+dhe_hippodrome_barce.10 = {
+    type = country_event
+
+    title = dhe_hippodrome_barce.10.t
+    desc = dhe_hippodrome_barce.10.desc
+    picture = quarry
+    
+    left_portrait = current_ruler
+
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.10.a"
+        custom_tooltip = "dhe_hippodrome_barce_tooltip"
+    }
+}
+dhe_hippodrome_barce.1 = {
+    type = country_event 
+    hidden = yes
+
+    immediate = {
+        if = { # Building Progresses
+            limit = {
+                var:hippodrome_barce_progress < 3
+                owns = 3357
+            }
+            random_list = {
+                1 = { # Building progresses without any event
+                    change_variable = {
+                        name = hippodrome_barce_quality
+                        add = 1
+                    }
+                }
+                2 = { # Complication event - sunk ship with materials
+                    trigger_event = {
+                        id = "dhe_hippodrome_barce.2"
+                    }
+                }
+                2 = { # Complication event - Uninspired workers
+                    trigger_event = {
+                        id = "dhe_hippodrome_barce.3"
+                    }
+                }
+                2 = { # Complication event - 
+                    trigger_event = {
+                        id = "dhe_hippodrome_barce.4"
+                    }
+                }
+            }
+            change_variable = {
+                name = hippodrome_barce_progress
+                add = 1
+            }
+            trigger_event = { # Trigger next event
+                id = "dhe_hippodrome_barce.1"
+                days = { 150 300 }
+            }
+        } 
+        else_if = { # Building Finished
+            limit = {
+                var:hippodrome_barce_progress >= 3
+                owns = 3357
+            }
+            if = { # Mediocre Hippodrome
+                limit = {
+                    var:hippodrome_barce_quality < 3
+                }
+                trigger_event = {
+                    id = "dhe_hippodrome_barce.11"
+                }
+            }
+            else_if = {
+                limit = {
+                    var:hippodrome_barce_quality >= 3
+                }
+                trigger_event = {
+                    id = "dhe_hippodrome_barce.12"
+                }
+            }
+        }
+        else = { # Fallback cleanup
+            hidden_effect = {
+                remove_variable = hippodrome_barce_progress
+                remove_variable = hippodrome_barce_quality
+            }
+        }
+    }
+}
+# Complication Event - Ship with materials sunk
+dhe_hippodrome_barce.2 = {
+    type = country_event
+    title = "dhe_hippodrome_barce.2.t"
+    desc = "dhe_hippodrome_barce.2.desc"
+    picture = ship_in_storm
+    
+    left_portrait = current_ruler
+
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+        any_owned_province = {
+            is_coastal = yes
+        }
+    }
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                is_coastal = yes
+            }
+            save_scope_as = randomized_country_province
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.2.a"
+        custom_tooltip = "dhe_hippodrome_barce.2.a.tt"
+        add_treasury = {
+            subtract = root.has_monthly_income
+            multiply = 6
+            min = -500
+            max = -50
+        }
+        hidden_effect = {
+            change_variable = {
+                name = hippodrome_barce_quality
+                add = 1
+            }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.2.b"
+        custom_tooltip = "dhe_hippodrome_barce.2.b.tt"
+    }
+}
+# Complication Event - Uninspired Workers
+dhe_hippodrome_barce.3 = {
+    type = country_event
+    title = "dhe_hippodrome_barce.3.t"
+    desc = "dhe_hippodrome_barce.3.desc"
+    picture = quarry
+    
+    left_portrait = current_ruler
+
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+    }
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.3.a"
+        custom_tooltip = "dhe_hippodrome_barce.2.a.tt"
+        add_treasury = {
+            subtract = root.has_monthly_income
+            multiply = 4
+            min = -400
+            max = -40
+        }
+        hidden_effect = {
+            change_variable = {
+                name = hippodrome_barce_quality
+                add = 1
+            }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.3.b"
+        custom_tooltip = "dhe_hippodrome_barce.2.a.tt"
+        add_political_influence = subtract_influence_medium
+        hidden_effect = {
+            change_variable = {
+                name = hippodrome_barce_quality
+                add = 1
+            }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.3.c"
+        custom_tooltip = "dhe_hippodrome_barce.3.c.tt"
+    }
+}
+# Complication Event - Theft and sabotage
+dhe_hippodrome_barce.4 = {
+    type = country_event
+    title = "dhe_hippodrome_barce.4.t"
+    desc = "dhe_hippodrome_barce.4.desc"
+    picture = revolt
+    
+    left_portrait = current_ruler
+    right_portrait = scope:random_advisor
+
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+        any_character = {
+            has_any_office = yes
+            is_ruler = no
+        }
+    }
+
+    immediate = {
+        random_character = {
+            limit = {
+                has_any_office = yes
+                is_ruler = no
+            }
+            save_scope_as = random_advisor
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.4.a"
+        custom_tooltip = "dhe_hippodrome_barce.2.a.tt"
+        add_treasury = {
+            subtract = root.has_monthly_income
+            multiply = 3
+            min = -300
+            max = -30
+        }
+        hidden_effect = {
+            change_variable = {
+                name = hippodrome_barce_quality
+                add = 1
+            }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.4.b"
+        custom_tooltip = "dhe_hippodrome_barce.2.a.tt"
+        add_manpower = -5
+        hidden_effect = {
+            change_variable = {
+                name = hippodrome_barce_quality
+                add = 1
+            }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.4.c"
+        custom_tooltip = "dhe_hippodrome_barce.4.c.tt"
+    }
+}
+# Building Finished - Mediocre Hippodrome of Barce
+dhe_hippodrome_barce.11 = {
+    type = country_event
+    title = "dhe_hippodrome_barce.11.t"
+    desc = "dhe_hippodrome_barce.11.desc"
+    picture = great_city
+    
+    left_portrait = current_ruler
+    
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+    }
+
+    immediate = {
+        trigger_event = {
+            id = dhe_hippodrome_barce.41
+            days = { 180 365 }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.11.a"
+        p:3357 = {
+            #build_great_work = {
+            #   great_work = "colossus_of_rhodes"
+            #   locator = secondary_great_work
+            #}
+            finish_great_work_construction = {
+                great_work = "hippodrome_of_barce_work"
+                locator = great_work
+            }
+            set_variable = {
+                name = built_hippodrome
+            }
+        }
+        hidden_effect = {
+            remove_variable = hippodrome_barce_progress
+            remove_variable = hippodrome_barce_quality
+        }
+    }
+}
+
+# Building Finished - Great Hippodrome of Barce
+dhe_hippodrome_barce.12 = {
+    type = country_event
+    title = "dhe_hippodrome_barce.12.t"
+    desc = "dhe_hippodrome_barce.12.desc"
+    picture = great_city
+    
+    left_portrait = current_ruler
+    
+    goto_location = p:3357
+    
+    trigger = {
+        owns = 3357
+    }
+
+    immediate = {
+            trigger_event = {
+            id = dhe_hippodrome_barce.41
+            days = { 180 365 }
+        }
+    }
+
+    option = {
+        name = "dhe_hippodrome_barce.12.a"
+        p:3357 = {
+            #build_great_work = {
+            #   great_work = "colossus_of_rhodes"
+            #   locator = secondary_great_work
+            #}
+            finish_great_work_construction = {
+                great_work = "hippodrome_of_barce_work"
+                locator = great_work
+            }
+            set_variable = {
+                name = built_hippodrome
+            }
+        }
+        hidden_effect = {
+            remove_variable = hippodrome_barce_progress
+            remove_variable = hippodrome_barce_quality
+        }
+    }
+}
+### ANTAEUS GAMES ###
+
+dhe_hippodrome_barce.41 = { # Hold antaeus Games - sim to olympic.1
+    type = country_event
+    title = dhe_hippodrome_barce.41.t
+    desc = dhe_hippodrome_barce.41.desc
+    picture = great_work_celebration
+    goto_location = p:3357
+    
+    immediate = {
+        save_scope_as = antaeus_games_holder_country
+        trigger_event = {
+            id = dhe_hippodrome_barce.41
+            days = { 1824 1826 }
+        }
+    }
+
+    option = { #hold the games
+        name = dhe_hippodrome_barce.41.a
+        trigger = {
+            NOT = { has_civil_war = yes }
+        }
+        custom_tooltip = "anti_olympics_yay"
+        hidden_effect = {
+            every_country = {
+                limit = {
+                    OR = {
+                        country_culture_group = fezzani
+                        country_culture_group = numidian
+                        country_culture_group = egyptian
+                        country_culture_group = lower_nubian
+                        capital_scope = { is_in_region = lower_egypt_region }
+                        capital_scope = { is_in_region = upper_egypt_region }
+                        capital_scope = { is_in_region = lower_nubia_region }
+                        capital_scope = { is_in_region = cyrenaica_region }
+                        capital_scope = { is_in_region = fezzan_region }
+                        capital_scope = { is_in_region = africa_region }
+                        capital_scope = { is_in_region = numidia_region }
+                        capital_scope = { is_in_region = atlas_region }
+                        capital_scope = { is_in_region = mauretainia_region }
+                    }
+                    NOT = {
+                        this = root
+                    }
+                }
+                add_opinion = {
+                    modifier = barce_games_held
+                    target = root
+                }
+                trigger_event = {
+                    id = dhe_hippodrome_barce.43  # olympic.3
+                }
+            }
+        }
+        trigger_event = {
+            id = dhe_hippodrome_barce.42   # olympic.5
+            days = 120
+        }
+        ai_chance = {
+            factor = 100
+        }
+    }
+}
+
+dhe_hippodrome_barce.42 = { # Hold antaeus Games - sim to olympic.5
+    type = country_event
+    hidden = yes    
+    immediate = {
+        if = {
+            limit = {
+                any_character = {
+                    count >= 3
+                    has_variable = antaeus_games_attendee
+                }
+            }
+            every_character = {
+                limit = {
+                    has_variable = antaeus_games_attendee
+                }
+                add_to_list = antaeus_games_competitor_list
+            }
+            set_local_variable = {
+                name = event_selector
+                value = {
+                    integer_range = { min = 1 max = 6 }
+                }
+            }
+            ordered_in_list = { 
+                list = antaeus_games_competitor_list
+                limit = {
+                    is_alive = yes
+                    prisoner = no
+                    has_variable = antaeus_games_attendee
+                }
+                order_by = combined_stats_olympics_svalue
+                position = 0
+                check_range_bounds = no
+                var:antaeus_games_attendee = {
+                    save_scope_as = victor_origin_country
+                }
+                save_scope_as = victorious_competitor
+                random_list = {
+                    1 = { 
+                        scope:victorious_competitor = {
+                            death = {
+                                death_reason = death_in_olympics
+                            }
+                        }
+                    }
+                    99 = {}
+                }
+            }
+            every_in_list = {
+                list = antaeus_games_competitor_list
+                remove_from_list = antaeus_games_competitor_list
+            }
+            random_character = { 
+                limit = {
+                    is_alive = yes
+                    prisoner = no
+                    has_variable = antaeus_games_attendee
+                }
+                var:antaeus_games_attendee = {
+                    save_scope_as = highlight_1_origin_country
+                }
+                save_scope_as = highlight_competitor_1
+            }
+            random_character = {
+                limit = {
+                    is_alive = yes
+                    prisoner = no
+                    has_variable = antaeus_games_attendee
+                    NOR = {
+                        this = scope:highlight_competitor_1
+                    }
+                }
+                var:antaeus_games_attendee = {
+                    save_scope_as = highlight_2_origin_country
+                }
+                save_scope_as = highlight_competitor_2
+            }
+            scope:antaeus_games_holder_country = {
+                trigger_event = {
+                    id = dhe_hippodrome_barce.45  # olympic.6
+                }
+            }
+            every_country = {
+                limit = {
+                    has_variable = is_competing_in_antaeus_games
+                }
+                trigger_event = {
+                    id = dhe_hippodrome_barce.45  # olympic.6
+                }
+            }
+        }
+        else = {
+            scope:antaeus_games_holder_country = {
+                trigger_event = {
+                    id = dhe_hippodrome_barce.46  # olympic.8
+                }
+            }
+            every_country = {
+                limit = {
+                    has_variable = is_competing_in_antaeus_games
+                }
+                trigger_event = {
+                    id = dhe_hippodrome_barce.46  # olympic.8
+                }
+            }
+        }
+    }
+}
+dhe_hippodrome_barce.43 = { # Hold antaeus Games - sim to olympic.3
+    type = country_event
+    title = dhe_hippodrome_barce.43.t
+    desc = dhe_hippodrome_barce.43.desc
+    picture = great_work_celebration
+    
+    left_portrait = current_ruler
+    right_portrait = scope:antaeus_games_champion
+    right_portrait = scope:antaeus_games_champion_2
+    
+    goto_location = p:3357
+    
+    trigger = {
+        any_character = {
+            count >= 2
+            trigger_if = {
+                limit = {
+                    employer = {
+                        gender_equality = no
+                    }
+                }
+                is_female = no
+            }
+            age >= 17
+            is_ruler = no
+            is_primary_heir = no
+        }
+    }
+    
+    immediate = {
+        if = {
+            limit = {
+                any_character = {
+                    trigger_if = {
+                        limit = {
+                            employer = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
+                    age >= 17
+                    is_ruler = no
+                    is_primary_heir = no
+                    is_mercenary = no
+                    is_head_of_family = no
+                    NOT = { has_variable = pyrrhus_travelling }
+                }
+            }
+            random_character = {
+                limit = {
+                    trigger_if = {
+                        limit = {
+                            employer = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
+                    age >= 17
+                    is_ruler = no
+                    is_primary_heir = no
+                    is_mercenary = no
+                    is_head_of_family = no
+                    NOT = { has_variable = pyrrhus_travelling }
+                }
+                weight = {
+                    base = 1
+                    modifier = {
+                        factor = 1000
+                        combined_stats_olympics_svalue >= 25
+                        age <= 32
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_party_leader = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        has_any_office = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_general = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_governor = yes
+                    }
+                }
+                save_scope_as = antaeus_games_champion
+            }
+        }
+        if = {
+            limit = {
+                any_character = {
+                    trigger_if = {
+                        limit = {
+                            employer = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
+                    age >= 17
+                    is_ruler = no
+                    is_primary_heir = no
+                    is_mercenary = no
+                    is_head_of_family = no
+                    NOT = { has_variable = pyrrhus_travelling }
+                    NOT = {
+                        this = scope:antaeus_games_champion
+                    }
+                }
+            }
+            random_character = {
+                limit = {
+                    trigger_if = {
+                        limit = {
+                            employer = {
+                                gender_equality = no
+                            }
+                        }
+                        is_female = no
+                    }
+                    age >= 17
+                    has_any_office = no
+                    is_ruler = no
+                    is_primary_heir = no
+                    is_mercenary = no
+                    is_head_of_family = no
+                    NOT = { has_variable = pyrrhus_travelling }
+                    NOT = {
+                        this = scope:antaeus_games_champion
+                    }
+                }
+                weight = {
+                    base = 1
+                    modifier = {
+                        factor = 100
+                        combined_stats_olympics_svalue >= 25
+                        age <= 36
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_party_leader = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        has_any_office = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_general = yes
+                    }
+                    modifier = {
+                        factor = 0.1
+                        is_governor = yes
+                    }
+                }
+                save_scope_as = antaeus_games_champion_2
+            }
+        }
+    }
+    
+    option = {
+        name = dhe_hippodrome_barce.43.a      # "olympic.3.a"
+        if = {
+            limit = {
+                target_is_valid_character = scope:antaeus_games_champion
+            }
+            if = {
+                limit = {
+                    scope:antaeus_games_champion = {
+                        prisoner = yes
+                    }
+                }
+                release_prisoner = {
+                    target = scope:antaeus_games_champion
+                }
+            }
+            set_variable = {
+                name = is_competing_in_antaeus_games
+            }
+            scope:antaeus_games_champion = {
+                set_variable = {
+                    name = antaeus_games_attendee
+                    value = root
+                }
+                hidden_effect = {
+                    add_trait = olympic_competitor
+                    remove_all_positions = yes
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            employer = scope:antaeus_games_holder_country
+                        }
+                    }
+                    move_country = scope:antaeus_games_holder_country
+                }
+                trigger_event = {
+                    id = dhe_hippodrome_barce.44 # olympic.4
+                    days = 180
+                }
+            }
+        }
+        if = {
+            limit = {
+                is_iron_man = yes
+                is_ai = no
+            }
+            if = {
+                limit = {
+                    NOT = {
+                        has_variable = ach_panem_et_circenses_var
+                    }
+                }
+                set_variable = {
+                    name = ach_panem_et_circenses_var
+                    value = 1
+                }
+            }
+            else = {
+                change_variable = {
+                    name = ach_panem_et_circenses_var
+                    add = 1
+                }
+            }
+        }
+        ai_chance = {
+            base = 1
+            modifier = {
+                factor = 0.1
+                target_is_valid_character = scope:antaeus_games_champion
+                scope:antaeus_games_champion = {
+                    has_any_office = yes
+                    is_party_leader = yes
+                    is_clan_chief = yes
+                }
+            }
+        }
+    }
+    
+    option = {
+        name = dhe_hippodrome_barce.43.b # "olympic.3.b"
+        if = {
+            limit = {
+                exists = scope:antaeus_games_holder_country
+                scope:antaeus_games_holder_country = {
+                    has_land = yes
+                }
+                exists = scope:antaeus_games_champion_2
+                target_is_valid_character = scope:antaeus_games_champion_2
+            }
+            set_variable = {
+                name = is_competing_in_antaeus_games
+            }
+            if = {
+                limit = {
+                    scope:antaeus_games_champion_2 = {
+                        prisoner = yes
+                    }
+                }
+                release_prisoner = {
+                    target = scope:antaeus_games_champion_2
+                }
+            }
+            scope:antaeus_games_champion_2 = {
+                set_variable = {
+                    name = antaeus_games_attendee
+                    value = root
+                }
+                hidden_effect = {
+                    add_trait = olympic_competitor
+                    remove_all_positions = yes
+                }
+                move_country = scope:antaeus_games_holder_country
+                trigger_event = {
+                    id = dhe_hippodrome_barce.44 # olympic.4
+                    days = 180
+                }
+            }
+        }
+        ai_chance = {
+            base = 1
+            modifier = {
+                factor = 0.1
+                AND = {
+                    exists = scope:antaeus_games_champion_2
+                    target_is_valid_character = scope:antaeus_games_champion_2
+                    scope:antaeus_games_champion_2 = {
+                        OR = {
+                            has_any_office = yes
+                            is_party_leader = yes
+                            is_clan_chief = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    option = {
+        name = dhe_hippodrome_barce.43.c # "olympic.3.c"
+        current_ruler = {
+            add_popularity = subtract_popularity_small
+        }
+        ai_chance = {
+            base = 1
+        }
+    }
+}
+
+dhe_hippodrome_barce.44 = { # Hold antaeus Games - sim to olympic.4
+    type = character_event
+    hidden = yes
+    
+    trigger = {
+        is_alive = yes
+        has_variable = antaeus_games_attendee
+    }
+    
+    immediate = {
+        var:antaeus_games_attendee = {
+            save_scope_as = destination_country
+        }
+        if = {
+            limit = {
+                exists = scope:destination_country
+                scope:destination_country = {
+                    has_land = yes
+                }
+            }
+            remove_all_positions = yes
+            move_country = scope:destination_country
+            remove_variable = antaeus_games_attendee
+            remove_trait = olympic_competitor
+            if = {
+                limit = {
+                    has_character_modifier = foreign_citizen
+                }
+                remove_character_modifier = foreign_citizen
+            }
+        }
+        else = {
+            remove_variable = antaeus_games_attendee
+            remove_trait = olympic_competitor
+        }
+    }
+}
+dhe_hippodrome_barce.45 = { # Hold antaeus Games - sim to olympic.6
+    type = country_event
+    title = dhe_hippodrome_barce.45.t
+    desc = {
+        first_valid = {
+            triggered_desc = {
+                trigger = {
+                    exists = scope:victorious_competitor
+                    scope:victorious_competitor = {
+                        is_alive = no
+                    }
+                }
+                desc = "dhe_hippodrome_barce.45.desc_2"
+            }
+            triggered_desc = {
+                trigger = {
+                    always = yes
+                }
+                desc = "dhe_hippodrome_barce.45.desc"
+            }
+        }
+    }
+    picture = gladiators
+    
+    left_portrait = scope:highlight_competitor_1
+    left_portrait = scope:highlight_competitor_2
+    right_portrait = scope:victorious_competitor
+    
+    goto_location = scope:victor_origin_country.capital_scope
+    
+    trigger = {}
+    
+    immediate = {
+        if = {
+            limit = {
+                scope:victor_origin_country = root 
+            }
+            every_country = {
+                limit = {
+                    has_variable = is_competing_in_antaeus_games
+                    NOT = {
+                        this = root
+                    }
+                }
+                add_opinion = {
+                    modifier = olympic_victor
+                    target = root
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_variable = is_competing_in_antaeus_games
+            }
+            remove_variable = is_competing_in_antaeus_games
+        }
+    } 
+    
+    option = {
+        name = dhe_hippodrome_barce.45.a # "olympic.6.a"
+        trigger = {
+            scope:victor_origin_country = root
+        }
+        exclusive = yes
+        add_stability_effect = yes
+        scope:victorious_competitor = {
+            if = {
+                limit = {
+                    NOT = {
+                        has_trait = victorious
+                    }
+                    is_alive = yes
+                }
+                add_trait = victorious
+            }
+        }
+    }
+    
+    option = {
+        name = dhe_hippodrome_barce.45.b # "olympic.6.b"
+        current_ruler = {
+            add_popularity = popularity_small
+        }
+    }
+    
+    option = {
+        name = dhe_hippodrome_barce.45.c # "olympic.6.c"
+        trigger = {
+            scope:antaeus_games_holder_country = root
+        }
+        exclusive = yes
+        current_ruler = {
+            add_popularity = popularity_small
+        }
+        if = {
+            limit = {
+                scope:victor_origin_country = root
+            }
+            add_stability_effect = yes
+            scope:victorious_competitor = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_trait = victorious
+                        }
+                        is_alive = yes
+                    }
+                    add_trait = victorious
+                }
+            }
+        }
+    }
+}
+
+dhe_hippodrome_barce.46 = { # Hold antaeus Games - sim to olympic.8
+    type = country_event
+    title = dhe_hippodrome_barce.46.t # "olympic.8.t"
+    desc = dhe_hippodrome_barce.46.desc # "olympic.8.desc"
+    picture = slaves_working
+    
+    goto_location = scope:scythian_games_province_scope
+    
+    immediate = {
+        if = {
+            limit = {
+                has_variable = is_competing_in_antaeus_games
+            }
+            remove_variable = is_competing_in_antaeus_games
+        }
+    }
+    
+    option = {
+        name = "olympic.8.a"
+        if = {
+            limit = {
+                scope:antaeus_games_holder_country = root
+            }
+            current_ruler = {
+                add_popularity = subtract_popularity_small
+            }
+        }
+    }
+}
+
+###

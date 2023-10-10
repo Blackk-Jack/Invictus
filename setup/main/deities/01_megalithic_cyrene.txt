@@ -27,6 +27,11 @@ deity_manager = {
 			key = omen_cyre
 			deity = deity_cyre
 		}
+
+		2250 = { # Cyrene Amazigh (Not by Torugu)
+			key = omen_barce
+			deity = deity_barce
+		}
 	}
 }
 
