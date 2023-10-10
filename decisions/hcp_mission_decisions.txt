@@ -1,0 +1,25 @@
+country_decisions = {
+	persian_court = {
+
+		potential = {
+			num_of_cities >= 1
+			has_variable = persian_court_unlocked
+		}
+
+		allow = {
+			NOT = { has_variable = persian_court_cooldown }
+			treasury >= 100
+			
+			}
+		effect = {
+			set_variable = {
+			name = persian_court_cooldown
+			days = 3650
+		}
+				trigger_event = {
+					id = persian_court_event.1
+					}
+
+				}
+			}
+		}
