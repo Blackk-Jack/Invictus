@@ -8727,7 +8727,7 @@ country = {
 			pantheon = {
 				{ deity = 404 }
 				{ deity = 401 }
-				{ deity = 405 }
+				{ deity = 437 }
 				{ deity = 403 }
 			}
 		}
