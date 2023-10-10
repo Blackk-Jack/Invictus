@@ -13756,10 +13756,10 @@ country = {
 
 		KLS = { #Kalasas
 			family=80
-			government = tribal_kingdom
+			government = tribal_federation
 			primary_culture = dardic
 			religion = hindu
-			centralization=-10
+			centralization= 10 
 			capital = 4332
 
 
@@ -13770,7 +13770,7 @@ country = {
 		}
 
 		NBA = { #Nabha
-			government = tribal_kingdom
+			government = tribal_federation
 			primary_culture = dardic
 			religion = hindu
 			centralization=-10
